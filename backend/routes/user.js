@@ -29,7 +29,7 @@ const updatedBody = z.object({
 const userRouter = express.Router();
 
 
-userRouter.post("/user/signup", async (req,res)=>{
+userRouter.post("/signup", async (req,res)=>{
     const userData = req.body;
 
         const parsedData = await  userSchema.safeParse(userData);
@@ -69,7 +69,7 @@ const userId = newUser._id;
 });
 
 
-userRouter.post("/user/login", async(req,res)=>{
+userRouter.post("/login", async(req,res)=>{
     const data = req.body; 
     const safeData = await signinBody.safeParse(data);
     if (!safeData.success) {
@@ -115,4 +115,27 @@ userRouter.put("/", authMiddleware, async  (req,res)=>{
         message : "Updated succesfully!"
      })
 })
+
+userRouter.get("/bulk", (req,res)=>{
+    const filter = req.query.filter || "";
+    $or: [{
+        firstName: {
+            "$regex": filter
+        }
+    }, {
+        lastName: {
+            "$regex": filter
+        }
+    }]
+})
+
+res.json({
+    user: users.map(user => ({
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        _id: user._id
+    }))
+})
+ 
 module.exports ={  userRouter}; 
