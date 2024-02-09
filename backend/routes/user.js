@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 const jwt = require('jsonwebtoken');
 const jwtSecretKey = require('../config');
-const User = require('../schema/User')
+const {User, Account} = require('../schema/User')
 const z = require('zod');
 const  { authMiddleware } = require("../middleware");
 
@@ -56,6 +56,12 @@ const newUser = await User.create({
      firstName : realData.firstName,
      lastName : realData.lastName
 })    
+
+
+const newAccount = await Account.create({
+     balance :   1 + Math.random() * 10000,
+     userId : newUser._id
+})
 
 const userId = newUser._id;
         const token = jwt.sign({userId}, jwtSecretKey);
