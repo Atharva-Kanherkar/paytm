@@ -1,15 +1,11 @@
-
+ // backend/user/index.js
 const express = require('express');
-const userRouter = require('./user');
-const { accountRouter } = require('./accounts');
-const app = express();
-const PORT = 3000;
+const userRouter = require("./user");
+const accountRouter = require("./account");
 
+const router = express.Router();
 
-const mainRouter = express.Router();
+router.use("/user", userRouter);
+router.use("/account", accountRouter);
 
-app.use("/user",  userRouter)
-app.use("/account", accountRouter);
-
- 
- module.exports ={  mainRouter}; 
+module.exports = router;

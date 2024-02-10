@@ -1,1 +1,6 @@
-export const JWT_SECRET = "SDSD";
+ const JWT_SECRET = "SDSD";
+
+
+ module.exports={
+    JWT_SECRET
+ }
