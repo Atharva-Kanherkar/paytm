@@ -1,8 +1,8 @@
 import {Route, Router, Routes, BrowserRouter} from "react-router-dom"
   import {SignUp} from "./pages/Singup"
   import {Signin} from "./pages/Signin"
-  // import {SignUp} from "./pages/Sendmoney"
-  // import {SignUp} from "./pages/Dashboard"
+  import {SignUp} from "./pages/Sendmoney"
+  import {SignUp} from "./pages/Dashboard"
 function App() {
 
   return (
